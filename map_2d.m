@@ -359,9 +359,9 @@ classdef map_2d < handle
             assert(fp ~= -1, sprintf('Could not open "%s" for writing, no .txt-file saved (but everything else is saved).', filename));
             for ix = 1:obj.x_tot
                 for iy = 1:obj.y_tot
-                    fprintf(fp, '%g %g', obj.x(ix, iy), obj.y(ix, iy));
+                    fprintf(fp, '%g %g', obj.x(iy, ix), obj.y(iy, ix));
                     for iz = 1:obj.z_nr
-                        fprintf(fp, ' %g', obj.z(ix, iy, iz));
+                        fprintf(fp, ' %g', obj.z(iy, ix, iz));
                     end
                     fprintf(fp, '\n');
                 end
