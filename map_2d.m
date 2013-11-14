@@ -269,7 +269,10 @@ classdef map_2d < handle
         function obj = map_2d(prefix, f, x0, dx, x1, y0, dy, y1, order)
             if(nargin == 1)
                 obj.load(prefix);
-            elseif(nargin == 9)
+            elseif(nargin >= 8)
+                if(nargin < 9)
+                    order = 3;
+                end
                 assert(order >= 3, 'Need order >= 3');
                 assert(mod(order, 2) == 1, 'Need odd order');
                 obj.prefix = prefix;
