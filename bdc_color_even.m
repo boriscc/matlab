@@ -1,4 +1,9 @@
 function c_out = bdc_color_even(z, lim_in, c, c_nr)
+%  C_OUT = BDC_COLOR_EVEN(Z, LIM_IN=[1/3,2/3], C=..., C_NR=4000)
+%  Z: List of elements to plot
+%  LIM_IN: bin limits
+%  C: Colors to use for the bins
+%  C_NR: Number of colors in the color map
     if(nargin < 2)
         lim_in = [ 1/3, 2/3 ];
     end
