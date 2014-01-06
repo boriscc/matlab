@@ -343,7 +343,10 @@ classdef map_2d < handle
             obj.z_calc = dlmread(sprintf('%s.z_calc', obj.prefix));
         end
         
-        function save(obj)
+        function save(obj, new_prefix)
+            if(nargin > 1)
+                obj.prefix = new_prefix;
+            end
             filename = sprintf('%s.func', obj.prefix);
             fp = fopen(filename, 'w');
             assert(fp ~= -1, sprintf('SAVE FAILED: Could not open func-file "%s" for writing.', filename));
