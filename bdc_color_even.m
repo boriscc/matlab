@@ -8,7 +8,7 @@ function c_out = bdc_color_even(z, lim_in, c, c_nr)
         lim_in = [ 1/3, 2/3 ];
     end
     if(nargin < 3)
-        c = [ 0 0 1; 0 1 0; 1 1 0; 1 0 0; 1 1 1 ];
+        c = [ 0 0 0; 0 0 1; 0 1 1; 0 1 0; 1 1 0; 1 0 0; 1 0 1; 1 1 1 ];
     end
     if(nargin < 4)
         c_nr = 4000;
