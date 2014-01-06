@@ -205,7 +205,7 @@ classdef map_2d < handle
                 else
                     inter = obj.interp2(obj.z(yidx1, xidx1, iz));
                 end
-                err = obj.get_error(abs(calc - inter) ./ ((obj.level_nr - level_cur) * (abstol + reltol * abs(calc))));
+                err = obj.get_error(abs(calc - inter) ./ (abstol + reltol * abs(calc)));
 
                 for ky = 1:2
                     for kx = 1:2
