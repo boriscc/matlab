@@ -1,9 +1,13 @@
 function c_out = bdc_color_even(z, lim_in, c, c_nr)
 %  C_OUT = BDC_COLOR_EVEN(Z, LIM_IN=[1/3,2/3], C=..., C_NR=4000)
 %  Z: List of elements to plot
-%  LIM_IN: bin limits
-%  C: Colors to use for the bins
-%  C_NR: Number of colors in the color map
+%  LIM_IN [ OPTIONAL, default [ 1/3, 2/3 ] ]: bin limits
+%  C [ OPTIONAL, default see source ]: Colors to use for the bins
+%  C_NR [ OPTIONAL, default 4000 ]: Number of colors in the color map
+%  Example:
+%    surf(x, y, z);
+%    colormap(bdc_color_even(z, [ 0.2, 0.5, 0.8 ]))
+%    colorbar;
     if(nargin < 2)
         lim_in = [ 1/3, 2/3 ];
     end
