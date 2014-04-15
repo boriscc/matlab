@@ -8,7 +8,7 @@ function append_to_legend(h, name)
     if(isempty(outm))
         legend(h, name);
     else
-        legend([outh; h], outm{:}, name);
+        legend([outh; h], outm{:}, name, 'location', 'best');
     end
 end
 
