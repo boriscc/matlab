@@ -41,7 +41,7 @@ function col = bdc_color_zero(Z, col_nr, black_nr)
             col(1:(col_nr - black_nr), :) = bdc_color(col_nr - black_nr, negneg, neg, power, 1, mode);
             col((col_nr - black_nr + 1):end, :) = bdc_color(black_nr, neg, zero, power, 1, mode);
         else
-            col(1:end, :) = bd_color(col_nr, negneg, neg, power, 1, mode);
+            col(1:end, :) = bdc_color(col_nr, negneg, neg, power, 1, mode);
         end
     elseif Z_min >= 0 && Z_max > 0
         if Z_max * 0.01 > Z_min
