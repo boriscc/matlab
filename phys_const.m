@@ -9,6 +9,11 @@ function c = phys_const()
     c.c_err_SI = 0;
     c.c_ref = r1;
     
+    c.hbarc = 197.3269718;
+    c.bharc_unit = 'Mev*fm';
+    c.hbarc_err = 0.0000044;
+    c.hbarc_ref = r1;
+    
     c.mp = 938.272046;
     c.mp_unit = 'MeV';
     c.mp_err = 0.000021;
@@ -33,6 +38,22 @@ function c = phys_const()
     c.md_err_SI = 0.00000015e-27;
     c.md_ref = r1;
     
+    c.mt = 2808.921005;
+    c.mt_unit = 'MeV';
+    c.mt_err = 0.000062;
+    c.mt_SI = 5.00735630e-27;
+    c.mt_unit_SI = 'kg';
+    c.mt_err_SI = 0.00000022e-27;
+    c.mt_ref = r1;
+    
+    c.mh = 2808.391482;
+    c.mh_unit = 'MeV';
+    c.mh_err = 0.000062;
+    c.mh_SI = 5.00641234e-27;
+    c.mh_unit_SI = 'kg';
+    c.mh_err_SI = 0.00000022e-27;
+    c.mh_ref = r1;
+    
     c.mHe = 3727.379240;
     c.mHe_unit = 'MeV';
     c.mHe_err = 0.000082;
@@ -54,6 +75,20 @@ function c = phys_const()
     c.md_over_mp_unit_SI = '';
     c.md_over_mp_err_SI = c.md_over_mp_err;
     c.md_over_mp_ref = r1;
+    
+    c.mt_over_mp = 2.9937170308;
+    c.mt_over_mp_unit = '';
+    c.mt_over_mp_err = 0.0000000025;
+    c.mt_over_mp_unit_SI = '';
+    c.mt_over_mp_err_SI = c.mt_over_mp_err;
+    c.mt_over_mp_ref = r1;
+    
+    c.mh_over_mp = 2.9931526707;
+    c.mh_over_mp_unit = '';
+    c.mh_over_mp_err = 0.0000000025;
+    c.mh_over_mp_unit_SI = '';
+    c.mh_over_mp_err_SI = c.mh_over_mp_err;
+    c.mh_over_mp_ref = r1;
     
     c.mHe_over_mp = 3.97259968933;
     c.mHe_over_mp_unit = '';
@@ -82,4 +117,12 @@ function c = phys_const()
     c.atom_ionization_E_H_1_unit = 'eV';
     c.atom_ionization_E_H_1_err = 0.000000000012;
     c.atom_ionization_E_H_1_ref = 'NIST ASD (http://physics.nist.gov/asd)';
+    
+    c.a0 = 0.52917721092;
+    c.a0_unit = 'Å';
+    c.a0_err = 0.00000000017;
+    c.a0_SI = c.a0*1e-10;
+    c.a0_unit_SI = 'm';
+    c.a0_err_SI = c.a0_err*1e-10;
+    c.a0_ref = r1;
 end
