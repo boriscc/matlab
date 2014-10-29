@@ -14,6 +14,14 @@ function c = phys_const()
     c.hbarc_err = 0.0000044;
     c.hbarc_ref = r1;
     
+    c.alpha = 0.0072973525698;
+    c.alpha_unit = '';
+    c.alpha_err = 0.0000000000024;
+    c.alpha_SI = c.alpha;
+    c.alpha_unit_SI = c.alpha_unit;
+    c.alpha_err_SI = c.alpha_err;
+    c.alpha_ref = r1;
+    
     c.mp = 938.272046;
     c.mp_unit = 'MeV';
     c.mp_err = 0.000021;
@@ -119,7 +127,7 @@ function c = phys_const()
     c.atom_ionization_E_H_1_ref = 'NIST ASD (http://physics.nist.gov/asd)';
     
     c.a0 = 0.52917721092;
-    c.a0_unit = 'Å';
+    c.a0_unit = 'ï¿½';
     c.a0_err = 0.00000000017;
     c.a0_SI = c.a0*1e-10;
     c.a0_unit_SI = 'm';
