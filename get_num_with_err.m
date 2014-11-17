@@ -2,6 +2,9 @@ function str = get_num_with_err(num, err, significant)
     if nargin < 3
         significant = 2;
     end
+    if imag(err) ~= 0
+        error('Got imaginary error');
+    end
     
     expo = log10(10^significant / err);
     if expo == floor(expo)

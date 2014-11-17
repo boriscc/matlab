@@ -109,7 +109,7 @@ switch MoveFoc
  case 1
     %--- move focus to subplot # ---
     H    = get(gcf,'Children');
-    Ptot = length(H);
+    Ptot = sum(strcmp(get(H,'type'),'axes'));
     if (length(M)==1),
        M    = Ptot - M + 1; 
     elseif (length(M)==2),
