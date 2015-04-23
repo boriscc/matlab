@@ -27,7 +27,7 @@ function str = get_num_with_err(num, err_down, err_up, num_significant, err_sign
     
     significant = min([get_level(max([-err_down, err_up])) - get_level(num) + num_significant, err_significant]);
     
-    if significant <= 0
+    if significant <= -1
         level = get_level(num);
         num = 10^(level+1-num_significant)*round(num*10^(num_significant-level-1));
         if level+1-num_significant >= 0
@@ -44,29 +44,68 @@ function str = get_num_with_err(num, err_down, err_up, num_significant, err_sign
         assert(err > 0, 'Bad error');
 
         [ expo, err_disp, num_disp ] = get_disp(significant, err, num);
+        if get_level(err_disp) == err_significant
+            significant = significant - 1;
+            [ expo, err_disp, num_disp ] = get_disp(significant, err, num);
+        end
         if expo >= 0
-            form = sprintf('%%+.%df(%%d)', expo);
-            str = sprintf(form, num_disp, err_disp);
+            if err_disp == 0
+                form = sprintf('%%+.%df', expo);
+                str = sprintf(form, num_disp);
+            else
+                form = sprintf('%%+.%df(%%d)', expo);
+                str = sprintf(form, num_disp, err_disp);
+            end
         else
-            str = sprintf('%+*.0f(%d)', significant - expo, num_disp, err_disp*10^-expo);
+            if err_disp == 0
+                str = sprintf('%+*.0f', significant - expo, num_disp);
+            else
+                str = sprintf('%+*.0f(%d)', significant - expo, num_disp, err_disp*10^-expo);
+            end
         end
     else
         assert(err_up > err_down, 'Must have one error with |err| > 0');
         if err_up == 0
             [ expo, err_disp, num_disp ] = get_disp(significant, -err_down, num);
+            if get_level(err_disp) == err_significant
+                significant = significant - 1;
+                [ expo, err_disp, num_disp ] = get_disp(significant, -err_down, num);
+            end
             if expo >= 0
-                form = sprintf('%%+.%df_{(-%%d)}^{(+0)}', expo);
-                str = sprintf(form, num_disp, err_disp);
+                if err_disp == 0
+                    form = sprintf('%%+.%df', expo);
+                    str = sprintf(form, num_disp);
+                else
+                    form = sprintf('%%+.%df_{(-%%d)}^{(+0)}', expo);
+                    str = sprintf(form, num_disp, err_disp);
+                end
             else
-                str = sprintf('%+*.0f_{(-%d)}^{(+0)}', significant - expo, num_disp, err_disp*10^-expo);
+                if err_disp == 0
+                    str = sprintf('%+*.0f', significant - expo, num_disp);
+                else
+                    str = sprintf('%+*.0f_{(-%d)}^{(+0)}', significant - expo, num_disp, err_disp*10^-expo);
+                end
             end
         elseif err_down == 0
             [ expo, err_disp, num_disp ] = get_disp(significant, err_up, num);
+            if get_level(err_disp) == err_significant
+                significant = significant - 1;
+                [ expo, err_disp, num_disp ] = get_disp(significant, err_up, num);
+            end
             if expo >= 0
-                form = sprintf('%%+.%df_{(-0)}^{(+%%d)}', expo);
-                str = sprintf(form, num_disp, err_disp);
+                if err_disp == 0
+                    form = sprintf('%%+.%df', expo);
+                    str = sprintf(form, num_disp);
+                else
+                    form = sprintf('%%+.%df_{(-0)}^{(+%%d)}', expo);
+                    str = sprintf(form, num_disp, err_disp);
+                end
             else
-                str = sprintf('%+*.0f_{(-0)}^{(+%d)}', significant - expo, num_disp, err_disp*10^-expo);
+                if err_disp == 0
+                    str = sprintf('%+*.0f', significant - expo, num_disp);
+                else
+                    str = sprintf('%+*.0f_{(-0)}^{(+%d)}', significant - expo, num_disp, err_disp*10^-expo);
+                end
             end
         else
             if -err_down < err_up
@@ -75,6 +114,10 @@ function str = get_num_with_err(num, err_down, err_up, num_significant, err_sign
                 err_max = -err_down;
             end
             [ expo, err_disp, num_disp ] = get_disp(significant, err_max, num);
+            if get_level(err_disp) == err_significant
+                significant = significant - 1;
+                [ expo, err_disp, num_disp ] = get_disp(significant, err_max, num);
+            end
             if -err_down > err_up
                 err_down_disp = err_disp;
                 err_up_disp = round(err_up*10^expo);
@@ -83,15 +126,20 @@ function str = get_num_with_err(num, err_down, err_up, num_significant, err_sign
                 err_down_disp = -round(err_down*10^expo);
             end
             if expo >= 0
-                if err_up_disp == err_down_disp
-                    form = sprintf('%%+.%df(%%%dd)', expo, err_significant);
+                if err_up_disp == 0 && err_down_disp == 0
+                    form = sprintf('%%+.%df', expo);
+                    str = sprintf(form, num_disp);
+                elseif err_up_disp == err_down_disp
+                    form = sprintf('%%+.%df(%%d)', expo);
                     str = sprintf(form, num_disp, err_up_disp);
                 else
-                    form = sprintf('%%+.%df_{(-%%%dd)}^{(+%%%dd)}', expo, err_significant, err_significant);
+                    form = sprintf('%%+.%df_{(-%%d)}^{(+%%d)}', expo);
                     str = sprintf(form, num_disp, err_down_disp, err_up_disp);
                 end
             else
-                if err_up_disp == err_down_disp
+                if err_up_disp == 0 && err_down_disp == 0
+                    str = sprintf('%+*.0f', significant - expo, num_disp);
+                elseif err_up_disp == err_down_disp
                     str = sprintf('%+*.0f(%d)', significant - expo, num_disp, err_up_disp*10^-expo);
                 else
                     str = sprintf('%+*.0f_{(-%d)}^{(+%d)}', significant - expo, num_disp, err_down_disp*10^-expo, err_up_disp*10^-expo);
