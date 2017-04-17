@@ -14,6 +14,14 @@ function c = phys_const()
     c.hbarc_err = 0.0000044;
     c.hbarc_ref = r1;
     
+    c.e = 1.602176565e-19;
+    c.e_unit = 'J';
+    c.e_err = 0.000000035e-19;
+    c.e_SI = c.e;
+    c.e_unit_SI = c.e_unit;
+    c.e_err_SI = c.e_err;
+    c.c_ref = r1;
+    
     c.alpha = 0.0072973525698;
     c.alpha_unit = '';
     c.alpha_err = 0.0000000000024;
@@ -133,4 +141,11 @@ function c = phys_const()
     c.a0_unit_SI = 'm';
     c.a0_err_SI = c.a0_err*1e-10;
     c.a0_ref = r1;
+    
+    c.eV90 = 1.000000004;
+    c.eV90_unit = 'eV';
+    c.eV90_err = 0.000000039;
+    c.eV90_SI = c.eV90 * c.e;
+    c.eV90_unit_SI = 'J';
+    c.eV90_err_SI = c.eV90_err * c.e;
 end
